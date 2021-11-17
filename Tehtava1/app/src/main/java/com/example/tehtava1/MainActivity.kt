@@ -1,5 +1,6 @@
 package com.example.tehtava1
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.button).setOnClickListener {
 
-            //TODO
+
 
             var tv = findViewById<TextView>(R.id.textView)
 
@@ -52,6 +53,14 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+            //avaa uusi activity
+            var intent = Intent(this@MainActivity, MainSettings::class.java)
+            var value = findViewById<EditText>(R.id.editTextNumber2)
+            var s = value.text.toString()
+            intent.putExtra("avain", s)
+            //startActivity(intent)
+            startActivityForResult(intent, 1)
+
         }
     }
 
@@ -77,4 +86,14 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }*/
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        var result = resultCode.toString()
+        findViewById<EditText>(R.id.editTextNumber2).setText(result)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }
+
+
+
