@@ -15,7 +15,13 @@ class MyView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         paint.color = Color.RED
-        canvas?.drawOval(x1, 100f, x1+100, 200f, paint)
+        canvas?.drawOval(x1, 100f, x1+100f, 200f, paint)
+    }
+
+    fun setXY(x: Float, y: Float)
+    {
+        x1 = x
+        invalidate()
     }
 
 }
