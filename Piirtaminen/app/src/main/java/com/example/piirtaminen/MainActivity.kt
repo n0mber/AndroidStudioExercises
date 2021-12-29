@@ -1,5 +1,6 @@
 package com.example.piirtaminen
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -25,7 +26,13 @@ class MainActivity : AppCompatActivity() , SensorEventListener {
 
 
         //ASETA PIIRROS NÄKYMÄÄN
-        findViewById<MyView>(R.id.myView).setXY(200f, 0f)
+        findViewById<MyView>(R.id.myView).setXY(400f, 0f)
+        /*ObjectAnimator.ofFloat(findViewById<MyView>(R.id.myView), "translationY", 1000f).apply {
+            duration = 3000
+            start()
+        }*/
+
+
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -37,6 +44,30 @@ class MainActivity : AppCompatActivity() , SensorEventListener {
         /*if (p0 != null) {
             p0.values[0]
         }*/
+        if (p0.values[0] >= 9){
+            ObjectAnimator.ofFloat(findViewById<MyView>(R.id.myView), "translationX", -300f).apply {
+                duration = 2000
+                start()}
+        }
+        if (p0.values[0] <= -9){
+            ObjectAnimator.ofFloat(findViewById<MyView>(R.id.myView), "translationX", 300f).apply {
+                duration = 2000
+                start()}
+        }
+
+        if (p0.values[0] >= 0 && p0.values[0] < 9  ){
+            ObjectAnimator.ofFloat(findViewById<MyView>(R.id.myView), "translationY", 1000f).apply {
+                duration = 2000
+                start()}
+        }
+
+        if (p0.values[0] < 0 && p0.values[0] > -9  ){
+            ObjectAnimator.ofFloat(findViewById<MyView>(R.id.myView), "translationY", 0f).apply {
+                duration = 2000
+                start()}
+        }
+
+
     }
 
     override fun onResume() {

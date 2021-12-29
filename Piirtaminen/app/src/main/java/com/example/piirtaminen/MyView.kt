@@ -14,7 +14,7 @@ class MyView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        paint.color = Color.RED
+        paint.color = Color.GREEN
         canvas?.drawOval(x1, 100f, x1+100f, 200f, paint)
     }
 
